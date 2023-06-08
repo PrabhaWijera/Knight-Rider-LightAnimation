@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <style>
+        body {
+            background-color: #1a1d20 !important;
+            overflow: hidden;
+        }
+
+        .container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 90vh;
+            width: 100vw;
+            gap: 1vw;
+            color: #d28b8b;
+        }
+
+        .box {
+            height: 2vh;
+            width: 5vw;
+        }
+        .button{
+            margin-top: 20px;
+            margin-bottom: 20px;
+            margin-right: 20px;
+        }
+
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title>Assignment</title>
+</head>
+<body>
+<button id="btnStart" class="button btn btn-primary">Start</button>
+<button id="btnStop" class="button btn btn-danger">Stop</button>
+<div class="container">
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<audio src="../assets/Knight%20Rider%20Sms%20!%20Knight%20Rider%20!%20Theme.mp3" autoplay id="kk"></audio>
+<script>
+
+    let lightNumber = 0;
+    let directionRight = true;
+    let boxes = $('.box');
+
+    function lightUpdate() {
+        $('.box').css({background: 'white'});
+        boxes.css({background : 'white'});
+        boxes[lightNumber].style.background = 'crimson';
+        if (lightNumber > 0) {
+            boxes[lightNumber - 1].style.background = '#d28b8b';
+        }
+        if (lightNumber < 6) {
+            boxes[lightNumber + 1].style.background = '#d28b8b';
+        }
+        if (lightNumber === 0) {
+            directionRight = true;
+        }
+        if (lightNumber === 6) {
+            directionRight = false;
+        }
+        if (directionRight) {
+            lightNumber++;
+        } else {
+            lightNumber--;
+        }
+    }
+
+    let interval;
+    $('#btnStop').click(()=>{
+        clearInterval(interval);
+        $("#kk")[0].paused();
+    })
+    $('#btnStart').click(()=>{
+        clearInterval(interval);
+        $("#kk")[0].play();
+        interval = setInterval(lightUpdate, 90);
+    });
+
+</script>
+</body>
+</html>
+<!--
+
+
+//assigment10&#45;&#45;q in and out concept using set interval-->
